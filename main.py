@@ -15,6 +15,7 @@ def interrupt():
     ctrl_state = win32api.GetKeyState(0x11)
     tkey_state = win32api.GetKeyState(0x54)
     if(ctrl_state < -1 and tkey_state < -1):
+        print("Exiting...")
         return True
     else:
         return False
@@ -29,23 +30,25 @@ def is_mouse_down():    # Returns true if the left mouse button is pressed
 def increase_recoil():
     global recoil_x_value
     recoil_x_value-=1
-
+    print("Current recoil is : " + str(recoil_x_value) )
 def lower_recoil():
     global recoil_x_value
     recoil_x_value+=1
+    print("Current recoil is : " + str(recoil_x_value))
 def modify_recoil():
     numpad_10 = win32api.GetKeyState(0x68)
     if(numpad_10 < -1):
         increase_recoil()
-
+        time.sleep(0.15)
     numpad_2 = win32api.GetKeyState(0x62)
     if(numpad_2 < -1):
-        global recoil_x_value
         lower_recoil()
+        time.sleep(0.15)
+    
 
     
 
-
+print("App started")
 while(interrupt() == False):
     modify_recoil()
     if(is_mouse_down()):
