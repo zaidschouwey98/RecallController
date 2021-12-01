@@ -35,7 +35,7 @@ def lower_recoil():
     global recoil_x_value
     recoil_x_value+=1
     print("Current recoil is : " + str(recoil_x_value))
-def modify_recoil():
+def modify_vertical_recoil():
     numpad_10 = win32api.GetKeyState(0x68)
     if(numpad_10 < -1):
         increase_recoil()
@@ -50,7 +50,7 @@ def modify_recoil():
 
 print("App started")
 while(interrupt() == False):
-    modify_recoil()
+    modify_vertical_recoil()
     if(is_mouse_down()):
         for x in range(0, 55):
             # start = time.time()
