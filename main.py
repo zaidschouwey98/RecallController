@@ -41,6 +41,7 @@ def modify_recoil():
     numpad_10 = win32api.GetKeyState(0x68)
     numpad_2 = win32api.GetKeyState(0x62)
     numpad_4 = win32api.GetKeyState(0x64)
+    numpad_5 = win32api.GetKeyState(0x65)
     numpad_6 = win32api.GetKeyState(0x66)
     if(numpad_10 < -1):
         increase_recoil()
@@ -53,10 +54,14 @@ def modify_recoil():
     elif(numpad_4 < -1):
         decrease_right_recoil()
         time.sleep(0.15)
-    
     elif(numpad_6 < -1):
         decrease_left_recoil()
         time.sleep(0.15)
+    elif(numpad_5 < -1):
+        global recoil_y_value
+        global recoil_x_value
+        recoil_x_value = 0
+        recoil_y_value = 0
     else:
         return False
     
@@ -68,18 +73,18 @@ while(interrupt() == False):
     if(is_mouse_down()):
         for x in range(0, 55):
             # start = time.time()
-            time.sleep(0.016)
             if(is_mouse_down()):
                 
                 win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(recoil_x_value), int(recoil_y_value), 0, 0)
+                time.sleep(0.016)
                 # print(f'Time: {time.time() - start}')
             else:
                 break
         for x in range(0, 20):
-            time.sleep(0.016)
             if(is_mouse_down()):
                 win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(recoil_x_value), int(recoil_y_value), 0, 0)
+                time.sleep(0.016)
             else:
                 break
-    time.sleep(0.002)
+    time.sleep(0.016)
 
